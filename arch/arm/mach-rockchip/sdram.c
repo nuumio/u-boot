@@ -3,6 +3,11 @@
  * Copyright (C) 2017 Rockchip Electronics Co., Ltd.
  */
 
+// nuumio: Add debug
+#define DEBUG
+#undef CONFIG_LOGLEVEL
+#define CONFIG_LOGLEVEL 8
+
 #include <common.h>
 #include <dm.h>
 #include <init.h>

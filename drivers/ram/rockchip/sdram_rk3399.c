@@ -5,6 +5,11 @@
  * Adapted from coreboot.
  */
 
+// nuumio: Add debug
+#define DEBUG
+#undef CONFIG_LOGLEVEL
+#define CONFIG_LOGLEVEL 8
+
 #include <common.h>
 #include <clk.h>
 #include <dm.h>
@@ -2920,6 +2925,10 @@ static int sdram_init(struct dram_info *dram,
 	for (ch = 0; ch < 2; ch++) {
 		params->ch[ch].cap_info.rank = 2;
 		for (rank = 2; rank != 0; rank--) {
+			/* nuumio: debug for prep training (or whatever following does) */
+			debug("%s: prep training for rank %d, ch %d\n",
+					__func__, rank, ch);
+
 			for (channel = 0; channel < 2; channel++) {
 				const struct chan_info *chan =
 					&dram->chan[channel];
@@ -2930,6 +2939,10 @@ static int sdram_init(struct dram_info *dram,
 				phy_dll_bypass_set(publ, ddr_freq);
 				pctl_cfg(dram, chan, channel, params);
 			}
+
+			/* nuumio: debug for training start */
+			debug("%s: train data for rank %d, ch %d\n",
+					__func__, rank, ch);
 
 			/* start to trigger initialization */
 			pctl_start(dram, params, 3);
