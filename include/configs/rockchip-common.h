@@ -14,11 +14,13 @@
 
 #ifndef CONFIG_SPL_BUILD
 
-/* First try to boot from SD (index 1), then eMMC (index 0) */
+/* nuumio/RetrogatoR: eMMC first, SD-card second
+ * basically reverts: b212ad24a604b00b240add35516b7381965deb31
+ */
 #if CONFIG_IS_ENABLED(CMD_MMC)
 	#define BOOT_TARGET_MMC(func) \
-		func(MMC, mmc, 1) \
-		func(MMC, mmc, 0)
+		func(MMC, mmc, 0) \
+		func(MMC, mmc, 1)
 #else
 	#define BOOT_TARGET_MMC(func)
 #endif
