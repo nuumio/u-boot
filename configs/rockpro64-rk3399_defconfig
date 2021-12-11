@@ -84,3 +84,8 @@ CONFIG_VIDEO_ROCKCHIP=y
 CONFIG_DISPLAY_ROCKCHIP_HDMI=y
 CONFIG_SPL_TINY_MEMSET=y
 CONFIG_ERRNO_STR=y
+# Be default CONFIG_PREBOOT="usb start" when CONFIG_USB_KEYBOARD=y
+# RetrogatoR doesn't need that - boot is faster w/o usb.
+CONFIG_PREBOOT=""
+# RetrogatoR doesn't want to wait
+CONFIG_BOOTDELAY=0
